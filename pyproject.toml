@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "toml-validator"
+version = "0.1.0"
+description = "Simple TOML file validator using Python."
+authors = ["Thiago Carvalho D'Ávila <thiagocavila@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/staticdev/toml-validator"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+tomlkit = "^0.5.9"
+click = "^7.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry.scripts]
+toml-validator = "toml_validator.console:main"
