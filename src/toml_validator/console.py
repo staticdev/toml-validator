@@ -8,7 +8,7 @@ import click
 from tomlkit import parse
 from tomlkit.exceptions import TOMLKitError, ParseError
 
-#from . import __version__
+from . import __version__
 
 
 def get_toml_filename() -> Optional[str]:
@@ -21,7 +21,7 @@ def get_toml_filename() -> Optional[str]:
 
 
 @click.command()
-#@click.version_option(version=__version__)
+@click.version_option(version=__version__)
 def main() -> None:
     """ Gets TOML from current folder and validate  """
     filename = get_toml_filename()
