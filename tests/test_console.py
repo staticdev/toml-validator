@@ -8,7 +8,10 @@ from toml_validator import console
 def runner():
     return click.testing.CliRunner()
 
-# TODO make the two success cases (one using mock file and one running a valid file in e2e)
+
+# TODO make the two success cases
+# (one using mock file and one running a valid file in e2e)
+
 
 def test_main_without_arguments(runner):
     result = runner.invoke(console.main)

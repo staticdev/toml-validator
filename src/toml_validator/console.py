@@ -4,7 +4,7 @@ import sys
 
 import click
 from tomlkit import parse
-from tomlkit.exceptions import TOMLKitError, ParseError
+from tomlkit.exceptions import ParseError, TOMLKitError
 
 from . import __version__
 
@@ -15,14 +15,14 @@ from . import __version__
 def main(filename) -> None:
     """ Gets TOML file and validate  """
     if not filename.endswith(".toml"):
-       sys.exit("Error: \"FILANAME\" %s does not have a \".toml\" extension." % filename)
+        sys.exit('Error: "FILANAME" %s does not have a ".toml" extension.' % filename)
 
     with open(filename) as toml:
         lines = toml.read()
 
     click.secho("Reading file %s" % filename, fg="blue")
     try:
-        doc = parse(lines)
+        parse(lines)
         click.secho("No problems found parsing file %s!" % filename, fg="green")
     except (TOMLKitError, ParseError) as error:
         click.secho("Error found: " + str(error), fg="red")
