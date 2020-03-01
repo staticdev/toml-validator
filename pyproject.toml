@@ -16,13 +16,16 @@ click = "^7.0"
 pytest = "^5.3.5"
 coverage = {extras = ["toml"], version = "^5.0.3"}
 pytest-cov = "^2.8.1"
+black = "^19.10b0"
+flake8 = "^3.7.9"
+flake8-bandit = "^2.1.2"
+flake8-black = "^0.1.1"
+flake8-bugbear = "^20.1.4"
+flake8-import-order = "^0.18.1"
+safety = "^1.8.5"
 
 [tool.poetry.scripts]
 toml-validator = "toml_validator.console:main"
-[build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
-
 [tool.coverage.paths]
 source = ["src", "*/site-packages"] # configure source tree layout
 
@@ -32,3 +35,8 @@ source = ["toml_validator"] # configure package name
 
 [tool.coverage.report]
 show_missing = true # display line number of missing coverage
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
