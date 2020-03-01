@@ -1,8 +1,6 @@
 """ Toml Validator CLI """
 
-import glob
 import sys
-from typing import Optional
 
 import click
 from tomlkit import parse
@@ -11,20 +9,13 @@ from tomlkit.exceptions import TOMLKitError, ParseError
 from . import __version__
 
 
-def get_toml_filename() -> Optional[str]:
-    """ Returns first csv filename in current folder """
-    filenames = glob.glob("*.toml")
-    if filenames:
-        return filenames[0]
-    return sys.exit(
-        "Error: no file found, check the documentation for more info.")
-
-
 @click.command()
+@click.argument("filename", type=click.Path(exists=True))
 @click.version_option(version=__version__)
-def main() -> None:
-    """ Gets TOML from current folder and validate  """
-    filename = get_toml_filename()
+def main(filename) -> None:
+    """ Gets TOML file and validate  """
+    if not filename.endswith(".toml"):
+       sys.exit("Error: \"FILANAME\" %s does not have a \".toml\" extension." % filename)
 
     with open(filename) as toml:
         lines = toml.read()

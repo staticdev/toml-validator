@@ -6,7 +6,7 @@ Simple TOML file validator using Python.
 
 ```sh
 pip install toml-validator
-toml-validator
+toml-validator FILANAME
 ```
 
-Reads the first *.toml file found in current folder. It gives a green message for correct files and red message with errors.
+It gives a green message for correct files and red message with errors.

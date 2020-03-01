@@ -1,0 +1,9 @@
+rule infer
+  command = /usr/bin/python -m pytype.single --imports_info $imports --module-name $module -V 2.7 -o $out --no-report-errors --nofail --quick $in
+  description = infer $module
+rule check
+  command = /usr/bin/python -m pytype.single --imports_info $imports --module-name $module -V 2.7 -o $out --analyze-annotated --nofail --quick $in
+  description = check $module
+build /home/static/workspace/toml-validator/.pytype/pyi/toml_validator/console.pyi: check /home/static/workspace/toml-validator/src/toml_validator/console.py
+  imports = /home/static/workspace/toml-validator/.pytype/imports/toml_validator.console.imports
+  module = toml_validator.console
