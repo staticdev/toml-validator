@@ -42,4 +42,3 @@ show_missing = true # display line number of missing coverage
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
-
