@@ -1,5 +1,9 @@
 # toml-validator
 
+[![Tests](https://github.com/staticdev/toml-validator/workflows/Tests/badge.svg)](https://github.com/staticdev/toml-validator/actions?workflow=Tests)
+![PyPi](https://badge.fury.io/py/toml-validator.svg)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 Simple TOML file validator using Python.
 
 ## Quickstart
