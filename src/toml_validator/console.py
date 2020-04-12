@@ -1,32 +1,21 @@
-""" Toml Validator CLI """
-
-import sys
+"""Toml Validator CLI."""
 
 import click
-from tomlkit import parse
-from tomlkit.exceptions import ParseError, TOMLKitError
 
-from . import __version__
+from . import __version__, validation
 
 
 @click.command()
 @click.argument("filename", type=click.Path(exists=True))
 @click.version_option(version=__version__)
-def main(filename) -> None:
-    """ Gets TOML file and validate  """
-    if not filename.endswith(".toml"):
-        sys.exit('Error: "FILANAME" %s does not have a ".toml" extension.' % filename)
+def main(filename: str) -> None:
+    """Makes validations and echos errors if found."""
+    validation.validate_extension(filename)
 
-    with open(filename) as toml:
-        lines = toml.read()
+    click.secho("Reading file {}.".format(filename), fg="blue")
 
-    click.secho("Reading file %s" % filename, fg="blue")
-    try:
-        parse(lines)
-        click.secho("No problems found parsing file %s!" % filename, fg="green")
-    except (TOMLKitError, ParseError) as error:
-        click.secho("Error found: " + str(error), fg="red")
-
-
-if __name__ == "__main__":
-    main()
+    errors = validation.validate_toml(filename)
+    if errors:
+        click.secho("Error(s) found: {}.".format(errors), fg="red")
+    else:
+        click.secho("No problems found parsing file {}!".format(filename), fg="green")

@@ -27,6 +27,7 @@ flake8-import-order = "^0.18.1"
 safety = "^1.8.5"
 mypy = "^0.770"
 codecov = "^2.0.22"
+pytest-mock = "^3.0.0"
 
 [tool.poetry.scripts]
 toml-validator = "toml_validator.console:main"
