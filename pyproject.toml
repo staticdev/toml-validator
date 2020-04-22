@@ -28,6 +28,7 @@ safety = "^1.8.5"
 mypy = "^0.770"
 codecov = "^2.0.22"
 pytest-mock = "^3.0.0"
+typeguard = "^2.7.1"
 
 [tool.poetry.scripts]
 toml-validator = "toml_validator.console:main"
