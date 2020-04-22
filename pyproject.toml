@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "toml-validator"
-version = "1.0.0"
+version = "1.1.0"
 description = "Simple TOML file validator using Python."
 authors = ["Thiago Carvalho D'Ávila <thiagocavila@gmail.com>"]
 license = "MIT"
