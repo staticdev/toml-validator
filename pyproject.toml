@@ -31,7 +31,7 @@ pytest-mock = "^3.0.0"
 typeguard = "^2.7.1"
 
 [tool.poetry.scripts]
-toml-validator = "toml_validator.console:main"
+toml-validator = "toml_validator.__main__:main"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"] # configure source tree layout

@@ -1,11 +1,11 @@
-"""Test cases for the console module."""
+"""Test cases for the __main__ module."""
 from unittest.mock import Mock
 
 from click.testing import CliRunner
 import pytest
 from pytest_mock import MockFixture
 
-from toml_validator import console
+from toml_validator import __main__
 
 
 @pytest.fixture
@@ -36,7 +36,7 @@ def mock_validation_validate_toml_with_error(mocker: MockFixture) -> Mock:
 
 
 def test_main_without_argument(runner: CliRunner):
-    result = runner.invoke(console.main)
+    result = runner.invoke(__main__.main)
     assert result.exit_code == 2
 
 
@@ -49,7 +49,7 @@ def test_main_with_argument_success(
         with open("file.toml", "w") as f:
             f.write("content doesnt matter")
 
-        result = runner.invoke(console.main, ["file.toml"])
+        result = runner.invoke(__main__.main, ["file.toml"])
         assert result.output == (
             "Reading file file.toml.\n" "No problems found parsing file file.toml!\n"
         )
@@ -65,7 +65,7 @@ def test_main_with_argument_fail(
         with open("file.toml", "w") as f:
             f.write("content doesnt matter")
 
-        result = runner.invoke(console.main, ["file.toml"])
+        result = runner.invoke(__main__.main, ["file.toml"])
         assert result.output == (
             "Reading file file.toml.\n" "Error(s) found: |some error description|.\n"
         )
@@ -74,5 +74,5 @@ def test_main_with_argument_fail(
 
 @pytest.mark.e2e
 def test_main_without_arguments_in_production_env(runner: CliRunner):
-    result = runner.invoke(console.main)
+    result = runner.invoke(__main__.main)
     assert result.exit_code == 2
