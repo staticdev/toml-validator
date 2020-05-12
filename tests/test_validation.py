@@ -37,10 +37,12 @@ def mock_open_invalid_file(mocker: MockFixture) -> Mock:
 
 
 def test_validate_extension_valid() -> None:
+    """It returns nothing when extension is valid."""
     assert validation.validate_extension("file.toml")
 
 
 def test_validate_extension_invalid() -> None:
+    """It raises `SystemExit` when extensio is invalid."""
     with pytest.raises(SystemExit):
         assert validation.validate_extension("file.xml")
 
@@ -48,20 +50,24 @@ def test_validate_extension_invalid() -> None:
 def test_validate_toml_no_error(
     mock_open_valid_file: Mock, mock_tomlkit_parse: Mock
 ) -> None:
+    """It returns no errors when valid TOML."""
     assert validation.validate_toml("file.toml") == ""
 
 
 def test_validate_toml_with_error(
     mock_open_invalid_file: Mock, mock_tomlkit_parse_exception: Mock
 ) -> None:
+    """It returns errors when invalid TOML."""
     assert validation.validate_toml("file.toml") == "|some tomlkit error|"
 
 
 @pytest.mark.e2e
 def test_validate_toml_no_error_production(mock_open_valid_file) -> None:
+    """It returns no errors when valid TOML (e2e)."""
     assert validation.validate_toml("file.toml") == ""
 
 
 @pytest.mark.e2e
 def test_validate_toml_with_error_production(mock_open_invalid_file) -> None:
+    """It returns errors when invalid TOML (e2e)."""
     assert validation.validate_toml("file.toml") == 'Key "x" already exists.'
