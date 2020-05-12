@@ -1,15 +1,16 @@
 """Test cases for the __main__ module."""
 from unittest.mock import Mock
 
-from click.testing import CliRunner
 import pytest
+from click.testing import CliRunner
 from pytest_mock import MockFixture
 
 from toml_validator import __main__
 
 
 @pytest.fixture
-def runner():
+def runner() -> CliRunner:
+    """Fixture for invoking command-line interfaces."""
     return CliRunner()
 
 
@@ -36,6 +37,7 @@ def mock_validation_validate_toml_with_error(mocker: MockFixture) -> Mock:
 
 
 def test_main_without_argument(runner: CliRunner):
+    """It exits with a status code of 2."""
     result = runner.invoke(__main__.main)
     assert result.exit_code == 2
 
@@ -45,6 +47,7 @@ def test_main_with_argument_success(
     mock_validation_validate_extension: Mock,
     mock_validation_validate_toml_no_error: Mock,
 ):
+    """It exits with a status code of zero."""
     with runner.isolated_filesystem():
         with open("file.toml", "w") as f:
             f.write("content doesnt matter")
@@ -61,6 +64,7 @@ def test_main_with_argument_fail(
     mock_validation_validate_extension: Mock,
     mock_validation_validate_toml_with_error: Mock,
 ):
+    """It outputs error."""
     with runner.isolated_filesystem():
         with open("file.toml", "w") as f:
             f.write("content doesnt matter")
@@ -74,5 +78,6 @@ def test_main_with_argument_fail(
 
 @pytest.mark.e2e
 def test_main_without_arguments_in_production_env(runner: CliRunner):
+    """It exits with a status code of 2 (e2e)."""
     result = runner.invoke(__main__.main)
     assert result.exit_code == 2
