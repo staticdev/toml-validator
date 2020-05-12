@@ -2,7 +2,7 @@
 name = "toml-validator"
 version = "1.2.0"
 description = "Simple TOML file validator using Python."
-authors = ["Thiago Carvalho D'Ávila <thiagocavila@gmail.com>"]
+authors = ["Thiago Carvalho D'Avila <thiagocavila@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/staticdev/toml-validator"
