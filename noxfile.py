@@ -1,5 +1,6 @@
 """Nox sessions."""
 import contextlib
+import shutil
 import tempfile
 from pathlib import Path
 from typing import cast
@@ -10,7 +11,7 @@ from nox.sessions import Session
 
 
 package = "toml_validator"
-python_versions = ["3.8"]
+python_versions = ["3.7", "3.8"]
 nox.options.sessions = "pre-commit", "safety", "mypy", "tests"
 locations = "src", "tests", "noxfile.py"
 
@@ -139,8 +140,10 @@ def tests(session: Session) -> None:
     """Run the test suite."""
     install_package(session)
     install(session, "coverage[toml]", "pytest", "pytest_mock")
-    session.run("coverage", "run", "--parallel", "-m", "pytest", *session.posargs)
-    session.notify("coverage")
+    try:
+        session.run("coverage", "run", "--parallel", "-m", "pytest", *session.posargs)
+    finally:
+        session.notify("coverage")
 
 
 @nox.session
@@ -159,3 +162,33 @@ def typeguard(session: Session) -> None:
     install_package(session)
     install(session, "pytest", "typeguard", "pytest_mock")
     session.run("pytest", f"--typeguard-packages={package}", *session.posargs)
+
+
+@nox.session(python=python_versions)
+def xdoctest(session: Session) -> None:
+    """Run examples with xdoctest."""
+    args = session.posargs or ["all"]
+    install_package(session)
+    install(session, "xdoctest")
+    session.run("python", "-m", "xdoctest", package, *args)
+
+
+@nox.session(python="3.8")
+def docs(session: Session) -> None:
+    """Build the documentation."""
+    args = session.posargs or ["docs", "docs/_build"]
+
+    if session.interactive and not session.posargs:
+        args.insert(0, "--open-browser")
+
+    builddir = Path("docs", "_build")
+    if builddir.exists():
+        shutil.rmtree(builddir)
+
+    install_package(session)
+    install(session, "sphinx", "sphinx-autobuild")
+
+    if session.interactive:
+        session.run("sphinx-autobuild", *args)
+    else:
+        session.run("sphinx-build", *args)
