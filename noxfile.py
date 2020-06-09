@@ -11,7 +11,7 @@ from nox.sessions import Session
 
 
 package = "toml_validator"
-python_versions = ["3.8"]
+python_versions = ["3.7", "3.8"]
 nox.options.sessions = "pre-commit", "safety", "mypy", "tests"
 locations = "src", "tests", "noxfile.py"
 
