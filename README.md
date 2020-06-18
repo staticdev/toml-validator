@@ -1,4 +1,4 @@
-# toml-validator
+# TOML validator
 
 [![Tests](https://github.com/staticdev/toml-validator/workflows/Tests/badge.svg)](https://github.com/staticdev/toml-validator/actions?workflow=Tests)
 [![Supported Python Versions](https://img.shields.io/pypi/pyversions/toml-validator.svg)](https://pypi.python.org/pypi/toml-validator)
