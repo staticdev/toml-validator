@@ -27,6 +27,7 @@ codecov = "^2.1.7"
 pytest-mock = "^3.1.1"
 typeguard = "^2.9.1"
 pre-commit = "^2.5.1"
+pygments = "^2.6.1"
 
 [tool.poetry.scripts]
 toml-validator = "toml_validator.__main__:main"
