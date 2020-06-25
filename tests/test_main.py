@@ -1,4 +1,5 @@
 """Test cases for the __main__ module."""
+from typing import Any
 from unittest.mock import Mock
 
 import pytest
@@ -15,13 +16,13 @@ def runner() -> CliRunner:
 
 
 @pytest.fixture
-def mock_validation_validate_extension(mocker: MockFixture) -> Mock:
+def mock_validation_validate_extension(mocker: MockFixture) -> Any:
     """Fixture for mocking validation.validate_extension."""
     return mocker.patch("toml_validator.validation.validate_extension")
 
 
 @pytest.fixture
-def mock_validation_validate_toml_no_error(mocker: MockFixture) -> Mock:
+def mock_validation_validate_toml_no_error(mocker: MockFixture) -> Any:
     """Fixture for mocking validation.validate_toml with no errors."""
     mock = mocker.patch("toml_validator.validation.validate_toml")
     mock.return_value = ""
@@ -29,14 +30,14 @@ def mock_validation_validate_toml_no_error(mocker: MockFixture) -> Mock:
 
 
 @pytest.fixture
-def mock_validation_validate_toml_with_error(mocker: MockFixture) -> Mock:
+def mock_validation_validate_toml_with_error(mocker: MockFixture) -> Any:
     """Fixture for mocking validation.validate_toml with error."""
     mock = mocker.patch("toml_validator.validation.validate_toml")
     mock.return_value = "|some error description|"
     return mock
 
 
-def test_main_without_argument(runner: CliRunner):
+def test_main_without_argument(runner: CliRunner) -> None:
     """It exits with a status code of 2."""
     result = runner.invoke(__main__.main)
     assert result.exit_code == 2
@@ -46,7 +47,7 @@ def test_main_with_argument_success(
     runner: CliRunner,
     mock_validation_validate_extension: Mock,
     mock_validation_validate_toml_no_error: Mock,
-):
+) -> None:
     """It exits with a status code of zero."""
     with runner.isolated_filesystem():
         with open("file.toml", "w") as f:
@@ -63,7 +64,7 @@ def test_main_with_argument_fail(
     runner: CliRunner,
     mock_validation_validate_extension: Mock,
     mock_validation_validate_toml_with_error: Mock,
-):
+) -> None:
     """It outputs error."""
     with runner.isolated_filesystem():
         with open("file.toml", "w") as f:
@@ -77,7 +78,7 @@ def test_main_with_argument_fail(
 
 
 @pytest.mark.e2e
-def test_main_without_arguments_in_production_env(runner: CliRunner):
+def test_main_without_arguments_in_production_env(runner: CliRunner) -> None:
     """It exits with a status code of 2 (e2e)."""
     result = runner.invoke(__main__.main)
     assert result.exit_code == 2
