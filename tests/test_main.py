@@ -1,4 +1,5 @@
 """Test cases for the __main__ module."""
+from typing import Any
 from unittest.mock import Mock
 
 import click.testing
@@ -15,13 +16,13 @@ def runner() -> click.testing.CliRunner:
 
 
 @pytest.fixture
-def mock_validation_validate_extension(mocker: MockFixture) -> Mock:
+def mock_validation_validate_extension(mocker: MockFixture) -> Any:
     """Fixture for mocking validation.validate_extension."""
     return mocker.patch("toml_validator.validation.validate_extension")
 
 
 @pytest.fixture
-def mock_validation_validate_toml_no_error(mocker: MockFixture) -> Mock:
+def mock_validation_validate_toml_no_error(mocker: MockFixture) -> Any:
     """Fixture for mocking validation.validate_toml with no errors."""
     mock = mocker.patch("toml_validator.validation.validate_toml")
     mock.return_value = ""
@@ -29,7 +30,7 @@ def mock_validation_validate_toml_no_error(mocker: MockFixture) -> Mock:
 
 
 @pytest.fixture
-def mock_validation_validate_toml_with_error(mocker: MockFixture) -> Mock:
+def mock_validation_validate_toml_with_error(mocker: MockFixture) -> Any:
     """Fixture for mocking validation.validate_toml with error."""
     mock = mocker.patch("toml_validator.validation.validate_toml")
     mock.return_value = "|some error description|"
