@@ -36,7 +36,7 @@ TOML Validator
 Features
 --------
 
-* TODO
+CLI for tomlkit_.
 
 
 Requirements
@@ -93,6 +93,7 @@ Credits
 This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter`_ template.
 
 
+.. _tomlkit: https://pypi.org/project/tomlkit
 .. _@cjolowicz: https://github.com/cjolowicz
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _MIT: http://opensource.org/licenses/MIT
