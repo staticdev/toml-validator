@@ -1,4 +1,4 @@
-"""Toml Validator validations."""
+"""TOML Validator validations."""
 import sys
 
 import tomlkit
