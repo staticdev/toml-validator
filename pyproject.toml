@@ -14,7 +14,7 @@ Changelog = "https://github.com/staticdev/toml-validator/releases"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-tomlkit = ">=0.5.9,<0.7.0"
+tomlkit = ">=0.5.9,<0.8.0"
 click = "^7.0"
 
 [tool.poetry.dev-dependencies]
