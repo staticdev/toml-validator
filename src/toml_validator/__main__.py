@@ -11,6 +11,9 @@ from . import validation
 def main(filename: str) -> None:
     """Makes validations and echos errors if found.
 
+    Args:
+        filename: name of validated file.
+
     Return status:
     * 0: no errors found
     * 1: incorrect usage
