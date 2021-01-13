@@ -1,5 +1,6 @@
 """Command-line interface."""
 import click
+import sys
 
 from . import validation
 
@@ -8,7 +9,14 @@ from . import validation
 @click.argument("filename", type=click.Path(exists=True))
 @click.version_option()
 def main(filename: str) -> None:
-    """Makes validations and echos errors if found."""
+    """Makes validations and echos errors if found.
+    
+    Return status:
+    * 0: no errors found
+    * 1: incorrect usage
+    * 2: invalid path
+    * 3: errors found 
+    """
     validation.validate_extension(filename)
 
     click.secho("Reading file {}.".format(filename), fg="blue")
@@ -16,6 +24,7 @@ def main(filename: str) -> None:
     errors = validation.validate_toml(filename)
     if errors:
         click.secho("Error(s) found: {}.".format(errors), fg="red")
+        sys.exit(3)
     else:
         click.secho("No problems found parsing file {}!".format(filename), fg="green")
 

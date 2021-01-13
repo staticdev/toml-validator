@@ -60,7 +60,23 @@ def test_main_with_argument_success(
         assert result.exit_code == 0
 
 
-def test_main_with_argument_fail(
+def test_main_with_invalid_path(
+    runner: click.testing.CliRunner,
+    mock_validation_validate_extension: Mock,
+    mock_validation_validate_toml_with_error: Mock,
+) -> None:
+    """It outputs error."""
+    with runner.isolated_filesystem():
+        with open("file.toml", "w") as f:
+            f.write("content doesnt matter")
+
+        result = runner.invoke(__main__.main, ["file.to"])
+        assert result.output.startswith("Usage:")
+        assert result.exit_code == 2
+
+
+
+def test_main_with_errors(
     runner: click.testing.CliRunner,
     mock_validation_validate_extension: Mock,
     mock_validation_validate_toml_with_error: Mock,
@@ -74,7 +90,7 @@ def test_main_with_argument_fail(
         assert result.output == (
             "Reading file file.toml.\n" "Error(s) found: |some error description|.\n"
         )
-        assert result.exit_code == 0
+        assert result.exit_code == 3
 
 
 @pytest.mark.e2e
