@@ -10,12 +10,12 @@ from . import validation
 @click.version_option()
 def main(filename: str) -> None:
     """Makes validations and echos errors if found.
-    
+
     Return status:
     * 0: no errors found
     * 1: incorrect usage
     * 2: invalid path
-    * 3: errors found 
+    * 3: errors found
     """
     validation.validate_extension(filename)
 

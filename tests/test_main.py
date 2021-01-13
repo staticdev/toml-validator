@@ -75,7 +75,6 @@ def test_main_with_invalid_path(
         assert result.exit_code == 2
 
 
-
 def test_main_with_errors(
     runner: click.testing.CliRunner,
     mock_validation_validate_extension: Mock,
