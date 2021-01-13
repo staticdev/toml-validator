@@ -1,6 +1,7 @@
 """Command-line interface."""
-import click
 import sys
+
+import click
 
 from . import validation
 
