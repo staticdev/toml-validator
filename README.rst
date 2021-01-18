@@ -42,7 +42,7 @@ CLI for tomlkit_.
 Requirements
 ------------
 
-You need Python 3.6.1 or above (3.8 recommended) installed on your machine.
+You need Python 3.7.0 or above (latest 3.9 recommended) installed on your machine.
 
 
 Installation
@@ -60,7 +60,7 @@ Usage
 
 .. code:: console
 
-   $ toml-validator FILANAME
+   $ toml-validator FILAPATH1 FILEPATH2 ...
 
 
 It gives a green message for correct files and red message with errors.

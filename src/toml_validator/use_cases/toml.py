@@ -1,6 +1,4 @@
 """TOML Validator validations."""
-import sys
-
 import tomlkit
 from tomlkit.exceptions import ParseError
 from tomlkit.exceptions import TOMLKitError
@@ -19,10 +17,10 @@ def validate_extension(filename: str) -> bool:
     for extension in valid_extensions:
         if filename.endswith(extension):
             return True
-    sys.exit('Error: "FILANAME" {} does not have a valid extension.'.format(filename))
+    return False
 
 
-def validate_toml(filename: str) -> str:
+def execute(filename: str) -> str:
     """It validates the TOML.
 
     Args:
