@@ -38,7 +38,7 @@ flake8-rst-docstrings = "^0.0.14"
 pep8-naming = "^0.11.1"
 pre-commit-hooks = "^3.4.0"
 reorder-python-imports = "^2.3.6"
-mypy = "0.782"
+mypy = "0.800"
 
 [tool.poetry.scripts]
 toml-validator = "toml_validator.__main__:main"
